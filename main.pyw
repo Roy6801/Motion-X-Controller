@@ -41,9 +41,10 @@ def main(cfg):
                 ms.Action(cLocX, cLocY, fingersUp)
         except Exception as e:
             pass
-        #cv2.putText(img, str(int(fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 2, cv2.LINE_AA)
-        #cv2.rectangle(img, (150, 75), (camW - 150, camH - 75), (255, 0, 0), 1, cv2.LINE_AA)
-        #cv2.imshow('Output', img)
+        if cfg[3] == 1:
+            cv2.putText(img, str(int(fps)), (50,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 2, cv2.LINE_AA)
+            cv2.rectangle(img, (150, 75), (camW - 150, camH - 75), (255, 0, 0), 1, cv2.LINE_AA)
+            cv2.imshow('Output', img)
         pLocX, pLocY = cLocX, cLocY
         key = cv2.waitKey(1)
         if key == ord('q'):
