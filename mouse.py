@@ -3,6 +3,7 @@ import time
 import win32api as wapi
 
 holdDown = 3
+drag = False
 pItr = 0
 cItr = 0
 
@@ -36,12 +37,22 @@ class Mouse:
             return False
 
     def Action(self, x, y, fingersUp):
-        global holdDown, pItr, cItr
+        global holdDown, drag, pItr, cItr
         if fingersUp == []:
             holdDown = 3
             pItr = 0
             cItr = 0
+        
 
+        if fingersUp == [4]:
+            drag = not drag
+            if drag:
+                pyto.mouseDown(button="left")
+            else:
+                pyto.mouseUp(button="left")
+            time.sleep(1.0)
+        
+        
         if fingersUp == [4, 8]:
             pyto.leftClick()
         elif fingersUp == [8, 12]:
