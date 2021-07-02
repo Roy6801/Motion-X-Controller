@@ -1,5 +1,6 @@
 import pyautogui as pyto
 import time
+import win32api as wapi
 
 holdDown = 3
 pItr = 0
@@ -8,23 +9,28 @@ cItr = 0
 class Mouse:
     def __init__(self, mousePad, handNo=0):
         self.handNo = handNo
-        self.padX1, self.padY1, self.padX2, self. padY2 = mousePad
+        self.padX1, self.padY1, self.padX2, self.padY2 = mousePad
         pyto.FAILSAFE = False
-    
+
     def MousePad(self, tipId, lmList):
-        if lmList[self.handNo][tipId][1] > self.padX1 and lmList[self.handNo][tipId][1] < self.padX2 and lmList[self.handNo][tipId][2] > self.padY1 and lmList[self.handNo][tipId][2] < self.padY2:
+        if lmList[self.handNo][tipId][1] > self.padX1 and lmList[
+                self.handNo][tipId][1] < self.padX2 and lmList[
+                    self.handNo][tipId][2] > self.padY1 and lmList[
+                        self.handNo][tipId][2] < self.padY2:
             return True
         else:
             return False
 
     def LeftHandControl(self, lmList):
-        if lmList[self.handNo][2][1] > lmList[self.handNo][17][1] and lmList[self.handNo][0][2] > lmList[self.handNo][9][2]:
+        if lmList[self.handNo][2][1] > lmList[self.handNo][17][1] and lmList[
+                self.handNo][0][2] > lmList[self.handNo][9][2]:
             return True
         else:
             return False
 
     def RightHandControl(self, lmList):
-        if lmList[self.handNo][2][1] < lmList[self.handNo][17][1] and lmList[self.handNo][0][2] > lmList[self.handNo][9][2]:
+        if lmList[self.handNo][2][1] < lmList[self.handNo][17][1] and lmList[
+                self.handNo][0][2] > lmList[self.handNo][9][2]:
             return True
         else:
             return False
@@ -43,8 +49,8 @@ class Mouse:
         elif fingersUp == [8, 20]:
             pyto.doubleClick()
         elif fingersUp == [8]:
-            pyto.moveTo(x, y)
-        
+            wapi.SetCursorPos((int(x), int(y)))
+
         if fingersUp == [4, 20]:
             pyto.hotkey('win', 'd')
             time.sleep(1.0)
@@ -52,7 +58,6 @@ class Mouse:
         if fingersUp == [8, 12, 16, 20]:
             pyto.hotkey('alt', 'tab')
             time.sleep(1.0)
-        
 
         if fingersUp == [12, 16, 20]:
             pyto.scroll(200)
@@ -62,9 +67,9 @@ class Mouse:
             pyto.scroll(-200)
         elif fingersUp == [20]:
             pyto.scroll(-50)
-        
+
         cItr = time.time()
-        
+
         if fingersUp == [4, 8, 12, 16, 20]:
             if int(cItr) - int(pItr) == 1:
                 print(holdDown)
@@ -75,7 +80,7 @@ class Mouse:
             if holdDown == 0:
                 pyto.hotkey('alt', 'f4')
                 holdDown = 3
-        
+
         if fingersUp == [4, 8, 12]:
             if int(cItr) - int(pItr) == 1:
                 print(holdDown)
