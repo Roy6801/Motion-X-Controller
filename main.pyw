@@ -5,26 +5,26 @@ import cv2
 import time
 
 
-def main(rhc, scrCount):
+def main(cfg):
     fps = 1
     camW = 640
     camH = 480
     pLocX, pLocY = 0, 0
     cLocX, cLocY = 0, 0
-    smoothening = 3
+    smoothening = cfg[2]
     cap = cv2.VideoCapture(0)
     cap.set(3, camW)
     cap.set(4, camH)
     ht = handTracker(maxHands=1, tipIds=[4, 8, 12, 16, 20])
     ms = Mouse((150, 75, camW - 150, camH - 75))
-    if rhc == 0:
+    if cfg[0] == 0:
         rightHandControl = False
         hand = ms.LeftHandControl
     else:
         rightHandControl = True
         hand = ms.RightHandControl
     
-    sc = Scale((camW - 300, camH - 150), scrCount)
+    sc = Scale((camW - 300, camH - 150), scrCount=cfg[1])
 
     while True:
         start = time.time()
@@ -57,8 +57,6 @@ if __name__ == "__main__":
             cfg = []
             for line in fr:
                 cfg.append(line)
-            rhc = int(cfg[0])
-            scrCount = int(cfg[1])
     except Exception as e:
         pass
-    main(rhc, scrCount)
+    main(cfg)
