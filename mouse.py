@@ -108,5 +108,4 @@ class Mouse:
                 if holdDown == 3:
                     pItr = cItr
                 if holdDown == 0:
-                    holdDown = 3
                     exit(1)
