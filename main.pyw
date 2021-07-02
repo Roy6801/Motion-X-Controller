@@ -5,7 +5,7 @@ import cv2
 import time
 
 
-def main(rhc):
+def main(rhc, scrCount):
     fps = 1
     camW = 640
     camH = 480
@@ -24,7 +24,7 @@ def main(rhc):
         rightHandControl = True
         hand = ms.RightHandControl
     
-    sc = Scale((camW - 300, camH - 150))
+    sc = Scale((camW - 300, camH - 150), int(scrCount))
 
     while True:
         start = time.time()
@@ -54,7 +54,9 @@ def main(rhc):
 if __name__ == "__main__":
     try:
         with open("config.txt", "r") as fr:
-            rhc = fr.read()
+            cfg = fr.read()
+            rhc = cfg[0]
+            scrCount = cfg[1]
     except Exception as e:
         pass
-    main(rhc)
+    main(rhc, scrCount)
