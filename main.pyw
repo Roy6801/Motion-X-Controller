@@ -56,7 +56,7 @@ if __name__ == "__main__":
         with open("config.txt", "r") as fr:
             cfg = []
             for line in fr:
-                cfg.append(line)
+                cfg.append(int(line))
     except Exception as e:
         pass
     main(cfg)
