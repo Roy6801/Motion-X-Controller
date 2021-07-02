@@ -3,6 +3,7 @@ import time
 import win32api as wapi
 
 holdDown = 3
+lockMode = False
 drag = False
 pItr = 0
 cItr = 0
@@ -37,68 +38,75 @@ class Mouse:
             return False
 
     def Action(self, x, y, fingersUp):
-        global holdDown, drag, pItr, cItr
-        if fingersUp == []:
-            holdDown = 3
-            pItr = 0
-            cItr = 0
-        
+        global holdDown, drag, lockMode, pItr, cItr
 
-        if fingersUp == [4]:
-            drag = not drag
-            if drag:
-                pyto.mouseDown(button="left")
-            else:
-                pyto.mouseUp(button="left")
-            time.sleep(1.0)
-        
-        
-        if fingersUp == [4, 8]:
-            pyto.leftClick()
-        elif fingersUp == [8, 12]:
-            pyto.rightClick()
-        elif fingersUp == [8, 20]:
-            pyto.doubleClick()
-        elif fingersUp == [8]:
-            wapi.SetCursorPos((int(x), int(y)))
-
-        if fingersUp == [4, 20]:
-            pyto.hotkey('win', 'd')
+        if fingersUp == [8, 16, 20]:
+            lockMode = not lockMode
             time.sleep(1.0)
 
-        if fingersUp == [8, 12, 16, 20]:
-            pyto.hotkey('alt', 'tab')
-            time.sleep(1.0)
 
-        if fingersUp == [12, 16, 20]:
-            pyto.scroll(200)
-        elif fingersUp == [16, 20]:
-            pyto.scroll(50)
-        elif fingersUp == [12, 20]:
-            pyto.scroll(-200)
-        elif fingersUp == [20]:
-            pyto.scroll(-50)
-
-        cItr = time.time()
-
-        if fingersUp == [4, 8, 12, 16, 20]:
-            if int(cItr) - int(pItr) == 1:
-                print(holdDown)
-                holdDown -= 1
-                pItr = cItr
-            if holdDown == 3:
-                pItr = cItr
-            if holdDown == 0:
-                pyto.hotkey('alt', 'f4')
+        if not lockMode:
+            if fingersUp == []:
                 holdDown = 3
+                pItr = 0
+                cItr = 0
+            
 
-        if fingersUp == [4, 8, 12]:
-            if int(cItr) - int(pItr) == 1:
-                print(holdDown)
-                holdDown -= 1
-                pItr = cItr
-            if holdDown == 3:
-                pItr = cItr
-            if holdDown == 0:
-                holdDown = 3
-                exit(1)
+            if fingersUp == [4]:
+                drag = not drag
+                if drag:
+                    pyto.mouseDown(button="left")
+                else:
+                    pyto.mouseUp(button="left")
+                time.sleep(1.0)
+            
+            
+            if fingersUp == [4, 8]:
+                pyto.leftClick()
+            elif fingersUp == [8, 12]:
+                pyto.rightClick()
+            elif fingersUp == [8, 20]:
+                pyto.doubleClick()
+            elif fingersUp == [8]:
+                wapi.SetCursorPos((int(x), int(y)))
+
+            if fingersUp == [4, 20]:
+                pyto.hotkey('win', 'd')
+                time.sleep(1.0)
+
+            if fingersUp == [8, 12, 16, 20]:
+                pyto.hotkey('alt', 'tab')
+                time.sleep(1.0)
+
+            if fingersUp == [12, 16, 20]:
+                pyto.scroll(200)
+            elif fingersUp == [16, 20]:
+                pyto.scroll(50)
+            elif fingersUp == [12, 20]:
+                pyto.scroll(-200)
+            elif fingersUp == [20]:
+                pyto.scroll(-50)
+
+            cItr = time.time()
+
+            if fingersUp == [4, 8, 12, 16, 20]:
+                if int(cItr) - int(pItr) == 1:
+                    print(holdDown)
+                    holdDown -= 1
+                    pItr = cItr
+                if holdDown == 3:
+                    pItr = cItr
+                if holdDown == 0:
+                    pyto.hotkey('alt', 'f4')
+                    holdDown = 3
+
+            if fingersUp == [4, 8, 12]:
+                if int(cItr) - int(pItr) == 1:
+                    print(holdDown)
+                    holdDown -= 1
+                    pItr = cItr
+                if holdDown == 3:
+                    pItr = cItr
+                if holdDown == 0:
+                    holdDown = 3
+                    exit(1)
