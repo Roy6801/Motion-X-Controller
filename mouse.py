@@ -40,7 +40,7 @@ class Mouse:
     def Action(self, x, y, fingersUp):
         global holdDown, drag, lockMode, pItr, cItr
 
-        if fingersUp == [8, 16, 20]:
+        if fingersUp == [4, 8, 12, 16]:
             lockMode = not lockMode
             time.sleep(1.0)
 
