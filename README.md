@@ -3,6 +3,9 @@
 About
 ---
 A motion gesture mouse and hotkey control using Computer Vision (for Windows).
+This software uses OpenCV-Python. A webcam is required to be connected to run this program.
+Run Setup.bat for installing dependencies.
+Run MotionX.bat for launching the Program.
 
 
 Configuration
