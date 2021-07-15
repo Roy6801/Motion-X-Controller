@@ -1,6 +1,6 @@
-from tracker import handTracker
-from mouse import Mouse
-from scale import Scale
+from .tracker import handTracker
+from .mouse import Mouse
+from .scale import Scale
 import cv2
 import time
 
