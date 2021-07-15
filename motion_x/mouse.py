@@ -1,6 +1,6 @@
 import pyautogui as pyto
-import time
 import win32api as wapi
+import time
 
 holdDown = 3
 lockMode = False

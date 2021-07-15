@@ -1,7 +1,7 @@
 import cv2
 import mediapipe as mp
 
-class handTracker:
+class HandTracker:
     def __init__(self, mode=False, maxHands=2, detectionCon=0.5, trackCon=0.5, tipIds=[8]):
         self.mode = mode
         self.maxHands = maxHands
