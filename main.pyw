@@ -58,6 +58,7 @@ if __name__ == "__main__":
             cfg = []
             for line in fr:
                 cfg.append(int(line))
+        main(cfg)
     except Exception as e:
-        print(e)
-    main(cfg)
+        pass
+    
