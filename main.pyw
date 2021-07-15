@@ -1,8 +1,8 @@
-from .tracker import handTracker
-from .mouse import Mouse
-from .scale import Scale
-import cv2
+from motion_x.tracker import HandTracker
+from motion_x.mouse import Mouse
+from motion_x.scale import Scale
 import time
+import cv2
 
 
 def main(cfg):
@@ -15,7 +15,7 @@ def main(cfg):
     cap = cv2.VideoCapture(0)
     cap.set(3, camW)
     cap.set(4, camH)
-    ht = handTracker(maxHands=1, tipIds=[4, 8, 12, 16, 20])
+    ht = HandTracker(maxHands=1, tipIds=[4, 8, 12, 16, 20])
     ms = Mouse((150, 75, camW - 150, camH - 75))
     if cfg[0] == 0:
         rightHandControl = False
@@ -59,5 +59,5 @@ if __name__ == "__main__":
             for line in fr:
                 cfg.append(int(line))
     except Exception as e:
-        pass
+        print(e)
     main(cfg)
